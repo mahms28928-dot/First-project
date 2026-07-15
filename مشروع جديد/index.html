@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموقع التجريبي لنشر الهداية والدين</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            /* أجواء إسلامية: خلفية كريمية مع زخرفة خفيفة */
+            background-color: #fefcf5;
+            background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
+            color: #451a03;
+            line-height: 1.7;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* الشريط المتحرك باللون الذهبي الفخم */
+        .scrolling-bar {
+            background: linear-gradient(90deg, #b45309, #d97706);
+            color: #fffbeb;
+            font-weight: 700;
+            padding: 8px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .main-content {
+            padding: 15px 15px 90px 15px; 
+        }
+        
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+
+        .intro-box {
+            background: #fffbeb;
+            border: 2px solid #fde68a;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            box-shadow: 0 4px 10px rgba(180, 83, 9, 0.1);
+            text-align: center;
+            color: #78350f;
+        }
+
+        .intro-box p { font-size: 15px; margin: 0; font-weight: 600; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        /* أزرار التسبيح بستايل ذهبي */
+        .tasbih-btn {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            border: 2px solid #d97706;
+            color: #78350f;
+            padding: 12px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(180, 83, 9, 0.2);
+            transition: all 0.2s ease;
+            width: 100%;
+            min-height: 70px;
+            text-align: right;
+        }
+
+        .tasbih-btn:active { transform: scale(0.95); background: #fbbf24; }
+
+        .counter {
+            background-color: #b45309;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-left: 5px;
+        }
+
+        .prayer-card {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px solid #fde68a;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(180, 83, 9, 0.1);
+        }
+
+        .prayer-card h3 { color: #92400e; font-size: 18px; }
+
+        .prayer-btn {
+            font-family: 'Cairo', sans-serif;
+            background-color: #b45309;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(180, 83, 9, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .prayer-btn:active { transform: scale(0.95); }
+
+        .prayer-counter {
+            background-color: #92400e;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .alert-message {
+            display: none;
+            background-color: #b45309;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .video-box {
+            background-color: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .coming-soon-card {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px solid #fde68a;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            color: #92400e;
+        }
+
+        iframe { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 12px; margin-top: 15px; }
+
+        .comment-input-box {
+            width: 100%; height: 90px; border-radius: 12px; border: 2px solid #fde68a;
+            padding: 12px; box-sizing: border-box; font-family: 'Cairo', sans-serif;
+            font-size: 14px; resize: none; margin-bottom: 10px;
+        }
+
+        .comment-item {
+            background: #fffbeb; border-right: 4px solid #b45309; padding: 12px;
+            border-radius: 10px; margin-bottom: 10px; font-size: 14px; color: #78350f; font-weight: 600;
+        }
+
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: #fffbeb; border-top: 2px solid #fde68a;
+            box-shadow: 0 -4px 15px rgba(180, 83, 9, 0.08);
+            display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000;
+        }
+
+        .bottom-tab-btn {
+            font-family: 'Cairo', sans-serif; font-weight: 700; border: none; background: none;
+            color: #92400e; font-size: 15px; cursor: pointer; display: flex;
+            flex-direction: column; align-items: center; gap: 4px;
+        }
+
+        .bottom-tab-btn.active { color: #b45309; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    <div class="scrolling-bar">
+        <marquee scrollamount="5">❄️ اللهم صلّ وسلم وبارك على نبينا ورسولنا محمد وعلى آله وصحبه أجمعين ❄️</marquee>
+    </div>
+
+    <div class="main-content">
+        <h1>الموقع التجريبي لنشر الهداية والدين 🌟</h1>
+        <p>منصة تفاعلية هادفة لتعزيز القيم الدينية وتذكير القلوب بذكر الله عز وجل.</p>
+        
+        <div class="intro-box">
+            <p>💡 <strong>نبذة عن الموقع:</strong> منصة إيمانية متكاملة تجمعك بالذكر الحكيم والدروس الدينية المؤثرة. <strong>اطمئن، يتم حفظ تقدمك في سلسلة التسبيح والاستغفار تلقائياً في جهازك</strong> لتعود وتستكمل وردك في أي وقت بكل سهولة! 🤍</p>
+        </div>
+        
+        <hr>
+
+        <div class="buttons-container">
+            <button class="tasbih-btn" onclick="count('count1')"><span>سبحان الله</span><span id="count1" class="counter">0</span></button>
+            <button class="tasbih-btn" onclick="count('count2')"><span>الحمد لله</span><span id="count2" class="counter">0</span></button>
+            <button class="tasbih-btn" onclick="count('count3')"><span>لا إله إلا الله</span><span id="count3" class="counter">0</span></button>
+            <button class="tasbih-btn" onclick="count('count4')"><span>الله أكبر</span><span id="count4" class="counter">0</span></button>
+            <button class="tasbih-btn" onclick="count('count5')"><span>اللهم صل وسلم وبارك علي سيدنا محمد</span><span id="count5" class="counter">0</span></button>
+            <button class="tasbih-btn" onclick="count('count6')"><span>استغفر الله</span><span id="count6" class="counter">0</span></button>
+            <button class="tasbih-btn" onclick="count('count7')"><span>الحمدلله حمدا كثيراً طيباً مباركاً فيه</span><span id="count7" class="counter">0</span></button>
+            <button class="tasbih-btn" onclick="count('count8')"><span>سبحان الله وبحمده عدد خلقه ورضا نفسه وزنه عرشه ومداد كلماته</span><span id="count8" class="counter">0</span></button>
+        </div>
+
+        <div id="deen-section" class="tab-content active">
+            <p>سوف نتحدث عن الصلاة..... الصلاة هي أول شيء يحاسب عليه الإنسان، فليه متصليش وأنت بتؤمن إن فيه دنيا وآخرة ولا عندك شك؟ صلي علشان ربنا ثم علشان نفسك وادعي ربنا يحقق لك كل أحلامك واسعى إنك ترضي ربنا والرضا ده بيجي من الصلاة والعبادات التانية، تعرف إنك لما تهجر الصلاة كأنك كفرت لأنك كده بتكون مسلم اسم ومفيش فرق بينك وبين عابد الأصنام.</p>
+            
+            <div class="prayer-card">
+                <h3>اضغط وشاركنا الصلاة على النبي ﷺ</h3>
+                <button class="prayer-btn" onclick="pray()">
+                    <span>صليت على النبي 🤍</span>
+                    <span id="prayerCount" class="prayer-counter">0</span>
+                </button>
+                <div id="alertMsg" class="alert-message">تمت الصلاة على النبي، كسبت ثواباً يا بطل! 🤍</div>
+            </div>
+
+            <div class="video-box">
+                <h2>فيديو للشيخ محمد الغليظ وهو دليلك للقرب من ربنا</h2>
+                <iframe src="https://www.youtube.com/embed/LUhi8GoeBGw" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div class="video-box">
+                <h2>أخطر دقائق تسمعها عن التوبة! 🗣️</h2>
+                <iframe src="https://www.youtube.com/embed/Qqblfl2_rzQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="self-section" class="tab-content">
+            <div class="coming-soon-card">
+                <h2>قسم تطوير الذات 🌱</h2>
+                <p>قريباً جداً.. جاري تحضير أقوى الفيديوهات لتطوير شخصيتك! 💪🚀</p>
+            </div>
+        </div>
+
+        <div id="comments-section" class="tab-content">
+            <div class="video-box">
+                <h2>💬 صندوق آراء وتطوير الموقع</h2>
+                <textarea id="commentInput" class="comment-input-box" placeholder="اكتب رأيك هنا..."></textarea>
+                <button class="prayer-btn" onclick="addComment()" style="width: 100%;">إرسال التعليق ✍️</button>
+                <div id="commentsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <button class="bottom-tab-btn active" onclick="switchTab('deen-section', this)"><span>🕌</span><span>الدين</span></button>
+        <button class="bottom-tab-btn" onclick="switchTab('self-section', this)"><span>🌱</span><span>تطوير الذات</span></button>
+        <button class="bottom-tab-btn" onclick="switchTab('comments-section', this)"><span>💬</span><span>التعليقات</span></button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            for (let i = 1; i <= 8; i++) {
+                document.getElementById('count' + i).innerText = localStorage.getItem('count' + i) || 0;
+            }
+            document.getElementById('prayerCount').innerText = localStorage.getItem('prayerCount') || 0;
+            let savedComments = localStorage.getItem('siteComments');
+            if (savedComments) document.getElementById('commentsList').innerHTML = savedComments;
+        };
+
+        function switchTab(sectionId, button) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.bottom-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            button.classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function count(id) {
+            let el = document.getElementById(id);
+            let val = parseInt(el.innerText) + 1;
+            el.innerText = val;
+            localStorage.setItem(id, val);
+        }
+
+        function pray() {
+            let el = document.getElementById('prayerCount');
+            let val = parseInt(el.innerText) + 1;
+            el.innerText = val;
+            localStorage.setItem('prayerCount', val);
+            let alert = document.getElementById('alertMsg');
+            alert.style.display = 'block';
+            setTimeout(() => alert.style.display = 'none', 2000);
+        }
+
+        function addComment() {
+            let input = document.getElementById('commentInput');
+            if (!input.value.trim()) return;
+            let div = document.createElement('div');
+            div.className = "comment-item";
+            div.innerText = input.value;
+            document.getElementById('commentsList').prepend(div);
+            localStorage.setItem('siteComments', document.getElementById('commentsList').innerHTML);
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
